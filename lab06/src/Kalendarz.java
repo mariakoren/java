@@ -25,7 +25,7 @@ public class Kalendarz {
         return dane;
     }
 
-    public ArrayList<Zdarzenie> getSpotkania(Predicate<Zdarzenie> predykat, DayOfWeek dzien) {
+    public ArrayList<Zdarzenie> getZdarzenia(Predicate<Zdarzenie> predykat, DayOfWeek dzien) {
         var zdarzenia = new ArrayList<Zdarzenie>();
         if (dane == null) {
             return null;
@@ -38,7 +38,7 @@ public class Kalendarz {
         return zdarzenia;
     }
 
-    public void addSpotkanie(final DayOfWeek dzien, final Zdarzenie zdarzenie) throws AddSpotkanieException {
+    public void addZdarzenie(final DayOfWeek dzien, final Zdarzenie zdarzenie) throws AddSpotkanieException {
         if (dane == null) {
             dane = new HashMap<DayOfWeek, ArrayList<Zdarzenie>>();
         }

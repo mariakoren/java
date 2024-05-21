@@ -68,20 +68,20 @@ public class Main {
         var zadanie7 = new Zadanie("opis zadania 7", LocalTime.of(14, 0), LocalTime.of(15, 0), Status.WYKONANE);
 
         try {
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, spotkanie1);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, spotkanie2);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, spotkanie3);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, spotkanie4);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, spotkanie5);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, spotkanie6);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, spotkanie7);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, zadanie1);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, zadanie2);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, zadanie3);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, zadanie4);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, zadanie5);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, zadanie6);
-            kalendarz.addSpotkanie(DayOfWeek.MONDAY, zadanie7);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, spotkanie1);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, spotkanie2);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, spotkanie3);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, spotkanie4);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, spotkanie5);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, spotkanie6);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, spotkanie7);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, zadanie1);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, zadanie2);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, zadanie3);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, zadanie4);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, zadanie5);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, zadanie6);
+            kalendarz.addZdarzenie(DayOfWeek.MONDAY, zadanie7);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -176,7 +176,7 @@ public class Main {
 
         var spotkanie = new Spotkanie(opis, czasRozpoczecia, czasZakonczenia, priorytet);
         try {
-            kalendarz.addSpotkanie(day, spotkanie);
+            kalendarz.addZdarzenie(day, spotkanie);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -199,7 +199,7 @@ public class Main {
 
         var zadanie = new Zadanie(opis, czasRozpoczecia, czasZakonczenia, status);
         try {
-            kalendarz.addSpotkanie(day, zadanie);
+            kalendarz.addZdarzenie(day, zadanie);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -209,7 +209,7 @@ public class Main {
         var czasRozpoczecia = dostanCzas(scanner.nextLine());
         System.out.println("Podaj godzinę zakończenia spotkania [HH:MM]");
         var czasZakonczenia = dostanCzas(scanner.nextLine());
-        var spotkania = kalendarz.getSpotkania((s) -> s instanceof Spotkanie &&  s.getCzasStart().equals(czasRozpoczecia) && s.getCzasKoniec().equals(czasZakonczenia), dzien);
+        var spotkania = kalendarz.getZdarzenia((s) -> s instanceof Spotkanie &&  s.getCzasStart().equals(czasRozpoczecia) && s.getCzasKoniec().equals(czasZakonczenia), dzien);
         if (spotkania.size() == 1) {
             kalendarz.getDane().get(dzien).remove(spotkania.get(0));
         } else {
@@ -231,7 +231,7 @@ public class Main {
         var czasRozpoczecia = dostanCzas(scanner.nextLine());
         System.out.println("Podaj godzinę zakończenia zadania [HH:MM]");
         var czasZakonczenia = dostanCzas(scanner.nextLine());
-        var zadania = kalendarz.getSpotkania((s) -> s instanceof Zadanie &&  s.getCzasStart().equals(czasRozpoczecia) && s.getCzasKoniec().equals(czasZakonczenia), dzien);
+        var zadania = kalendarz.getZdarzenia((s) -> s instanceof Zadanie &&  s.getCzasStart().equals(czasRozpoczecia) && s.getCzasKoniec().equals(czasZakonczenia), dzien);
         if (zadania.size() == 1) {
             kalendarz.getDane().get(dzien).remove(zadania.get(0));
         } else {
@@ -255,7 +255,7 @@ public class Main {
             if (zdarzenia == null) {
                 System.out.println("Brak zdarzeń w wybranym dniu");
             } else {
-                var spotkania = kalendarz.getSpotkania(s -> s instanceof Spotkanie, day );
+                var spotkania = kalendarz.getZdarzenia(s -> s instanceof Spotkanie, day );
                 for (var spotkanie : spotkania) {
                     System.out.println(spotkanie);
                 }
@@ -273,7 +273,7 @@ public class Main {
             if (zdarzenia == null) {
                 System.out.println("Brak zdarzeń w wybranym dniu");
             } else {
-                var zadania = kalendarz.getSpotkania(s -> s instanceof Zadanie, day );
+                var zadania = kalendarz.getZdarzenia(s -> s instanceof Zadanie, day );
                 for (var zadanie : zadania) {
                     System.out.println(zadanie);
                 }
@@ -286,7 +286,7 @@ public class Main {
 
     private static void wyswietlSpotkaniaOPriorytecie(Scanner scanner, Kalendarz kalendarz, DayOfWeek dzien) {
         Priorytet priorytet = dostanPriorytet(scanner);
-        var spotkania = kalendarz.getSpotkania(s -> s instanceof Spotkanie && ((Spotkanie) s).getPriorytet().equals(priorytet), dzien);
+        var spotkania = kalendarz.getZdarzenia(s -> s instanceof Spotkanie && ((Spotkanie) s).getPriorytet().equals(priorytet), dzien);
         if (spotkania == null) {
             System.out.println("Brak spotkan");
             return;
@@ -299,7 +299,7 @@ public class Main {
 
     private static void wyswietlZadaniaOStatusie(Scanner scanner, Kalendarz kalendarz, DayOfWeek dzien) {
         Status status = dostanStatus(scanner);
-        var zadania = kalendarz.getSpotkania(s -> s instanceof Zadanie && ((Zadanie) s).getStatus().equals(status), dzien);
+        var zadania = kalendarz.getZdarzenia(s -> s instanceof Zadanie && ((Zadanie) s).getStatus().equals(status), dzien);
         if (zadania == null) {
             System.out.println("Brak spotkan");
             return;
@@ -315,7 +315,7 @@ public class Main {
         scanner.nextLine();
         System.out.println("Podaj godzinę rozpoczęcia spotkania [HH:MM]");
         var czas = dostanCzas(scanner.nextLine());
-        var spotkania = kalendarz.getSpotkania(
+        var spotkania = kalendarz.getZdarzenia(
                 (s) -> {
                     if (s instanceof Spotkanie spotkanie) {
                         return !spotkanie.getCzasStart().isBefore(czas) && spotkanie.getPriorytet().equals(priorytet);
@@ -340,7 +340,7 @@ public class Main {
         scanner.nextLine();
         System.out.println("Podaj godzinę rozpoczęcia zadania [HH:MM]");
         var czas = dostanCzas(scanner.nextLine());
-        var zadania = kalendarz.getSpotkania(
+        var zadania = kalendarz.getZdarzenia(
                 (s) -> {
                     if (s instanceof Zadanie zadanie) {
                         return zadanie.getCzasKoniec().isBefore(czas) && zadanie.getStatus().equals(status);
