@@ -26,3 +26,13 @@ Add a meeting for a selected day, remove a selected meeting from a selected day,
 Program - weekly meeting calendar
 
 Code optimization of lab04, lambda expressions
+
+## lab06
+Program - weekly meeting calendar
+
+Code optimization of lab04 and lab05, using abstract class
+
+## lab07
+Sales offers - apartments and houses
+
+Adding apartments or houses to the same structure, filtering apartments and houses using only one method and lambdas. Provide control over inheritance from an abstract class
